@@ -1,0 +1,15 @@
+
+{% block content %}
+
+{% load static %}
+{% csrf_token %}
+
+    <p>
+        We've emailed you instructions for setting you password, if an account exits with the email you entered. 
+        You should receive them sortly. 
+    </p>
+
+    <p>
+        If you don't receive an email, Please make sure you've entered the address you registered with, and check your spam folder.
+    </p>
+{%endblock%}

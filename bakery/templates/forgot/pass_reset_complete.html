@@ -1,0 +1,8 @@
+{% block content %}
+{% load static %}
+
+    {% csrf_token %}
+    <p>
+       Your password changed successfully... click on <a href="{% url 'login' %}">Login</a> now.
+    </p>
+{%endblock%}

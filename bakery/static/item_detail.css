@@ -1,0 +1,298 @@
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700);
+* { 
+  box-sizing: border-box; 
+  font-family: 'Uchen', serif;
+}
+
+body {
+  
+  background: url('/static/image/bg_.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Raleway";
+  
+  
+  .card {
+    border-radius: 20px;
+    width: 850px;
+    height: 800px;
+    position: relative;
+    background: white;
+    margin: 10px auto 10px;
+    top: 70%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    transition: all 0.3s;
+    
+    &:hover {
+      
+      box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    
+    }
+    
+    nav {
+      
+      width: 100%;
+      color: #727272;
+      text-transform: uppercase;
+      padding: 7px;
+      border-bottom: 2px solid #efefef;
+      font-size: 15px;
+      
+      svg.heart {
+        
+        height: 24px;
+        width: 24px;
+        float: right;
+        margin-top: -3px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        
+        &:hover {
+          
+          fill: red;
+          
+        }
+        
+      }
+      svg.arrow {
+        
+        float: left;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+        margin-top: 15px;
+        
+      }
+      
+    }
+
+    .back p{
+      margin-bottom: 2px;
+
+    }
+    
+    .photo {
+      
+      padding-right:30px;
+      width: 50%;
+      text-align:center;
+      float: left;
+      border-bottom: 2px solid #efefef;
+      
+      img { 
+        margin: 20px 0px 0 2px;
+        max-height: 250px; 
+      }
+      
+    }
+    
+    .description {
+      
+       padding: 20px;
+       float: left;
+       width: 45%;
+       border-left: 2px solid #efefef;
+       border-bottom: 2px solid #efefef;
+       
+       h1 {
+         color: #515151;
+         font-weight: 300;
+         padding-top: 15px;
+         margin: 0;
+         font-size: 30px;
+         
+       }
+     
+       h2 {
+        color: #515151;
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: 500;
+       }
+
+       h3 { 
+        margin: 0;
+        color: #727272;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 15px
+      }
+      
+       h4 { 
+         margin: 0;
+         color: #727272;
+         /*text-transform: uppercase;*/
+         font-weight: 500;
+         font-size: 12px
+       }
+      
+       p { 
+         font-size: 20px; 
+         line-height: 20px;
+         color: #727272;
+         padding: 5px 0;
+         margin: 0;
+      }
+      
+       button {
+
+         outline: 0;
+         border: 0;
+         background: none;
+         border: 1px solid #d9d9d9;
+         padding: 8px 0px;
+         margin-bottom: 20px;
+         color: #515151;
+         text-transform: uppercase;
+         width: 125px;
+        
+         margin-right: 5px;
+         transition: all 0.3s ease;
+         font-weight: 500;
+         
+         &:hover {
+           
+           background-color: darken(white, 2%);
+           border: 1px solid #aedaa6;
+           color: #aedaa6;
+           cursor: pointer;
+           
+         }
+
+       }
+      
+    }
+    
+  }
+  
+}
+
+
+
+/*review & rating*/
+
+.review-container {
+ color:rgb(11, 11, 11);
+ margin-top:300px;
+ margin-right:50px;
+ margin-left:140px;
+ position: relative;
+}
+
+
+.review-form {
+  position: fixed; /* Fix the position of the form */
+  top: 350px; /* Adjust the top position as needed */
+  left: 73%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 1px 25px 15px 30px;
+  width: 390px;
+  height: 220px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rating-container > input{
+  display: none;
+}
+
+.rating-container {
+  margin-top: 0px;
+  
+ 
+}
+
+/* Hide Radio button */
+.rating-container > input{
+  display: none;
+}
+
+.rating-container{
+  display: inline-block;;
+  border: 0;
+}
+
+.rating-container > label{
+  float: right;
+}
+
+/* Showing the stars */
+.rating-container > label:before{
+  display: inline-block;
+  font-size: 1.1rem;
+  font-family: FontAwesome;
+  content: "\f005";
+  margin:0;
+  padding:0.3rem .2rem;
+  cursor: pointer;
+}
+
+/* Half star */
+.rating-container .half:before{
+  content: "\f089";
+  position: absolute;
+  padding-right: 0;
+}
+
+/* Click and hover */
+input:checked ~ label, label:hover ~ label{
+  color: #ffb503;
+}
+
+/* hover hightlight */
+input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label{
+  color: #cc9000;
+}
+
+.rating-star i{
+  color: #ffb503 !important;
+}
+
+#rating {
+  display: none;
+}
+
+#review-text {
+  width: 80%;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+#submit-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #935f23;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#submit-btn:hover {
+  background-color: #b26b19;
+}
+
+.reviews {
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.reviews1 {
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+.review-container.review {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  margin-bottom: 20px; /* Add margin bottom to separate reviews */
+}
+
+.review p {
+  margin: 5px 0;
+}

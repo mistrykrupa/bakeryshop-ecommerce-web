@@ -1,0 +1,77 @@
+{% block content %}
+{% load static %}
+{% if request.session.cart|length < 1 %}
+
+
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<link rel="stylesheet" href="https://fontawesome.com/icons/heart-circle-xmark?f=classic&s=duotone">
+
+<div id="cart-container">
+  <div id="cart-icon"><i class="fa-duotone fa-heart-circle-xmark"></i></div>
+  <div id="empty-message">Your wishlist is empty.</div>
+  <a href="{% url 'item' %}" id="continue-shopping-btn">Continue Shopping</a>
+</div>
+
+
+{% else %}
+
+
+{% load cart_tag %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<header>
+    <a href="{%url 'item'%}"><img src="/static/image/back.png" width="30px" class="arrow"></a>
+    
+        <h1> Wishlist</h1>
+</header>
+    
+    <div class="cart-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <!--<th>Action</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            {% if wishlist_items %}
+                {% for item in wishlist_items %}
+                    <tr>
+                
+                        <td>
+                            <img src="{{item.item.image.url}}" alt="Bread" class="product-image">  
+                        </td>
+                        <td>{{item.item.name}}</td>
+                        <td>Rs. {{item.item.price}}</td>
+                        <td>
+                            <!--
+                            {% for key,item in request.session.wishlist.items %}
+                                <a href=" {% url 'item_clear' key%}">{%endfor%}<button class="remove-btn" onclick="removeItem(this)">Remove</button></a>
+                            -->
+                        </td>
+                    </tr>
+                {%endfor%}
+            {% else %}
+                <tr>
+                <td colspan="4">Your wishlist is empty.</td>
+                </tr>
+            {% endif %}
+
+            <!-- Add more rows for other products -->
+              
+        </tbody>
+    </table>
+    
+        <div class="actions">
+            <a href="{% url 'cart_clear' %}"><button class="clear-btn" onclick=""> Clear All </button></a>
+        </div>
+    </div>
+
+  <script src="{% static 'cart.js' %}">
+    
+  </script>
+
+{%endif%}
+
+{%endblock%}

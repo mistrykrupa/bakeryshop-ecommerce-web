@@ -1,0 +1,122 @@
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href=" {% static 'item_detail.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="card">
+    <nav>
+      <a href="{%url 'item'%}"><svg class="arrow" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256 " stroke="#727272"/></svg>
+      </a> <p class="back"> Back </p>
+    </nav>
+    <div class="photo">
+      <img src="{{it.image.url}}">
+    </div>
+    <div class="description">
+      <h2>{{it.name}}</h2>
+      <h3> {{it.categories}}</h3><br>
+      <h4>Flavour : {{it.flavour}}</h4>
+      <h1> ₹ {{it.price}}</h1>     
+      <p>{{it.description|truncatewords:10|safe}}</p><!--<h4>Price: {{it.filter_price}}</h4>-->
+      
+      <a href="{% url 'cart_add' it.id %}"><button>Add Cart</button></a>
+
+
+      <!--
+      {% if user.is_authenticated %}
+         {% if it.id not in wishlist_item_ids %} 
+          <form action="{% url 'add_to_wishlist' it.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Add to Wishlist</button>
+          </form>
+        {% else %}
+          <form action="{% url 'remove_from_wishlist' it.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Remove from Wishlist</button>
+            </form>
+        {% endif %}
+      {% else %}
+        <a href="{% url 'login' %}">Login to add to Wishlist</a>
+      {% endif %}
+      -->
+
+    </div>
+    <form action="{%url 'add_review' it.id %}" method="post" id="reviewrating">
+      {% csrf_token %}
+      
+      <div class="review-container">
+       <div class="review-form">
+        <h4>Write Your Review:</h4>
+          <div class="rating-container">
+            <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+            
+            <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+            
+            <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+            
+            <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+            
+            <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+          </div>
+          <br>
+          
+          <strong class="text-success" id="review-res"> </strong>
+          <textarea  name="review" id="review-text" rows="3" placeholder="Write your review..."></textarea><br>
+          {% if user.is_authenticated %}
+          <a href="{{it.id}}"><button id="submit-btn">Submit Review</button></a>
+          {% else %}
+          <p>You must be logged in to post a review.<span><a href="{%url 'login' %}">Login Now</a></span></p>
+          {% endif %}
+        </div>
+      </div>
+    </form>
+        
+          <div class="reviews">
+            <!-- Existing reviews can be displayed here -->
+            <!-- Example review -->
+
+            <h2>Product Reviews</h2>
+            <ul>
+              {% for review in reviews %}
+              <!-- <li> -->
+                <div class="review">
+                  <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                      {% if user.userprofile.profile_image %}
+                      <img src="{{ review.user.userprofile.profile_image.url }}" alt="Profile Image" class="rounded-circle" width="30">
+                      {% endif %}
+                     {{ review.user.username }}
+                    </div>
+                  </div>
+                  <p><strong>Rating:</strong>  {{ review.rating }}</p>
+                  <p><strong>Review:</strong>  {{ review.review }}</p>
+                </div>
+              <!-- </li> -->
+              {%endfor%}
+            </ul>
+    
+          <!-- Additional reviews can be added here dynamically -->
+          <div id="average-rating">
+            {% if average_rating %}
+            Average Rating: {{ average_rating|floatformat:"1" }}
+            {% endif %}
+          </div>
+          
+        </div>
+<!--          <br>
+          <a href="{% url 'item'%}" class="reviews1">Back to Reviews</a>-->
+
+      </div>
+    </div>
+              
+        
+              <!-- Additional reviews can be added here dynamically -->
+              <!-- Placeholder for Success Message -->
+      <div id="review-res"></div>
+    
+        <!-- Display Average Rating -->
+      
+      
+    <script src="/static/review.js"></script>
+    {%endblock%}

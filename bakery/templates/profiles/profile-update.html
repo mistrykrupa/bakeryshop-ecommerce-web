@@ -1,0 +1,85 @@
+
+{% block content %}
+{% load static %}
+<head>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="path/to/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.body{
+  border:2px solid #935f23;
+}
+/* Custom CSS */
+input[type="text"],
+input[type="email"],
+input[type="file"],
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button[type="submit"] {
+    background-color: #935f23;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #bd813d;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+</style>
+</head>
+  
+<body>
+  
+  
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+      <h1 class="h3 mb-0 text-gray-800">Profile Update</h1>
+      </div>           -->
+
+      <!-- Main Content Here -->
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Edit Your Profile!..</h1>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{user_form}}
+                  {{profile_form}}
+                  <button type="submit" class="btn-success btn-block" style="background-color: #935f23;">Change Profile</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                  <a class="small" href="{% url 'home' %}" style="color: #935f23;">Back</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- /.container-fluid -->
+</body>
+
+
+{% endblock content %}

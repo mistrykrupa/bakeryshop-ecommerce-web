@@ -1,0 +1,223 @@
+{% extends 'hf.html'%}
+{% block content %}
+{% load static %}
+       
+    <!-- home section -->
+    <div class="home">
+        <div class="content" data-aos="zoom-out-right">
+            <h3>Delicious
+                <br>Cakes Bakery
+            </h3>
+            <h2>Category <span class="changecontent"></span></h2>
+            <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error,
+                <br>Lorem ipsum dolor sit amet consectetur. -->
+            <!-- </p> -->
+            <p> Testy and best product to our bakery. </p>
+        </div>
+    </div>
+
+    <!-- home section end -->
+
+<!-- top cards start -->
+
+<div class="container" id="box" data-aos="fade-up" data-aos-duration="1500">
+<div class="row">
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box1.jpg" alt="">
+        </div>
+    </div>
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box2.jpg" alt="">
+        </div>
+    </div>
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box3.jpg" alt="">
+        </div>
+    </div>
+</div>
+</div>
+ <!-- top cards end -->
+
+<!-- banner -->
+
+<div class="banner" data-aos="fade-up" data-aos-duration="1500">
+    <div class="content">
+        <h3>Delicious Cake,</h3>
+        <h3>Pastry & More</h3>
+        <p>Our product are fresh and testy.</p>
+        
+    </div>
+    <div class="img">
+        <img src="/static/image/banner-background.png" alt="">
+    </div>
+</div>
+ <!-- banner end -->
+
+<!-- product cards
+
+<section id="product-cards" data-aos="fade-up" data-aos-duration="1500">
+<div class="container">
+    <h1>CAKES</h1>
+    <div class="row" style="margin-top:50px;">
+       
+       <div class="col-md-3 py-3 py-md-0">
+        <br> <br>
+        <div class="card">
+            <div class="overlay">
+                <button type="button" class="btn btn-secondary" title="Quick View"><i><img src="/static/image/views.png" alt="" width="30px"></i></button>
+                <button type="button" class="btn btn-secondary" title="Add to Wishlist"><i><img src="/static/image/heart.png" alt="" width="30px"></i></button>
+                <button type="button" class="btn btn-secondary" title="Add to Cart"><i><img src="/static/image/add.png" alt="" width="30px"></i></button>
+            </div>
+            <img src= "" alt="">
+
+            {% if it.offer %}
+            <div class="spec_offer text-center"><a href ="#">Special Offer</a></div>
+            {% endif %}
+            <div class="card-body">
+                <h3></h3>
+                <div class="star">
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star "></i>
+                  <i class="bx bxs-star "></i>
+                </div>
+                <p></p>
+                <h6> <span><button>Add Cart</button></span></h6>
+            </div>
+        </div>
+       </div>
+       
+</section>
+product cards end-->
+
+
+<!-- gallary -->
+
+<section id="gallary"    data-aos="fade-up"
+data-aos-duration="1500">
+<div class="container">
+    <h1>OUR GALLARY</h1>
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Donuts</h3>
+                </div>
+                <img src="/static/image/o1.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Ice Cream</h3>
+                </div>
+                <img src="/static/image/o2.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Cup Cake</h3>
+                </div>
+                <img src="/static/image/o3.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 30px;"    data-aos="fade-up"
+    data-aos-duration="1500">
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Delicious Cake</h3>
+                </div>
+                <img src="/static/image/o4.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Chocolate Cake</h3>
+                </div>
+                <img src="/static/image/o5.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Slice Cake</h3>
+                </div>
+                <img src="/static/image/o6.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- gallary -->
+
+
+
+<!-- about -->
+<div class="container" id="about"    data-aos="fade-up"
+data-aos-duration="1500">
+<h1>ABOUT US</h1>
+<div class="row">
+    <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/about.png" alt="">
+        </div>
+    </div>
+    <div class="col-md-6 py-3 py-md-0">
+            <p>At ‘The Bake Shop’ we follow a fairly simple philosophy – offer a product of outstanding quality and ensure customer loyalty. The simplicity of that principle is backed up by a lot of hard work and years of experience. All our products are prepared in a modern semi-automatic factory where we adhere to stringent guidelines of hygiene and cleanliness ensuring a safe and healthy food preparation for all our patrons. We specialize in wide range of Bakery products, savory snacks, Breads and Eggless 100% Veg Cakes.
+
+                Bread Varieties include; Burger Buns, Pizza Base, Hot Dog, Footlong, Jumbo Sandwich Breads, Pita, Panini, Foccacia, Sourdough, Bagutte, etc.
+                
+                We also make Brownies & Macaroons, Donuts, Cupcakes with Icing & Mousse, Tea Time Slice Cakes & Muffins, Puffs & Croissant, Rolls & Sandwiches, Stuffed Buns, Pizza & Calzone, Quiche & Pies, Danish Pastry, Cookies, Kharis & Toast, Breadsticks & Lavash.</p>                
+
+        <br>
+    </div>
+</div>
+</div>
+<!-- about -->
+
+
+<!-- contact -->
+
+<div class="container" id="contact"    data-aos="fade-up"
+data-aos-duration="1500">
+<h1>CONTACT US</h1>
+<form action="/contact/" method="post">
+    {% csrf_token %}
+<div class="row">
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="text" name="name" class="form-control" id="usr" placeholder="Name">
+        </div>
+    </div>
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="email" name="email" class="form-control" id="eml" placeholder="Email">
+        </div>
+    </div>
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="number" name="phone" class="form-control" id="phn" placeholder="Phone">
+        </div>
+    </div>
+    
+</div>
+
+<div class="form-group">
+    <textarea class="form-control" name="message" rows="5" id="comment" placeholder="Message"></textarea>
+</div>
+<div id="messagebtn"><button>Send Message</button></div>
+</div>
+</form>
+<!-- contact end -->
+
+ {%endblock%}

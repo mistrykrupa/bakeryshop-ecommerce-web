@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Registration </title>
+	
+	<link rel="stylesheet" href="{% static '/register.css' %}">
+</head>
+
+<body>
+
+<div class="wrapper">
+	<span class="icon-close">
+		
+		
+		<a class="icon-close" href="{% url 'base'%}"><ion-icon name="close"></ion-icon></a>
+	</span>
+
+<div class = "form-box register">
+	<h2> Registration </h2>
+	<form action ="" method="post">
+		{% csrf_token %}
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="clipboard"></ion-icon>
+			</span>
+			<input type = "text" name="first_name" required>
+			<label>Firstname</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="id-card"></ion-icon>
+			</span>
+			<input type = "text" name="last_name" required>
+			<label>Lastname</label>
+		</div>
+		
+        <div class = "input-box1">
+			<span class="icon"><ion-icon name="transgender"></ion-icon></ion-icon></span>
+			<label for="gender">Gender<b>:</b></label>
+			<input type = "radio" id="male" name="gender" value="male">
+			<label for ="male">Male</label>
+			<input type = "radio" id= "female" name="gender" value="female">
+			<label for="female">Female</label>
+			
+		</div>
+		
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="person"></ion-icon>
+			</span>
+			<input type = "text" name="username" required>
+			<label>Username</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="mail"></ion-icon>
+			</span>
+			<input type = "email" name="email" required>
+			<label>Email</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="location"></ion-icon>
+			</span>
+			<input type = "text" name="address" required>
+			<label>Address</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="lock-closed"></ion-icon>
+			</span>
+			<input type = "password" name="password1"required>
+			<label>Password</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="lock-closed"></ion-icon>
+			</span>
+			<input type = "password" name="password2" required>
+			<label>Confirm password</label>
+		</div>
+
+		<br>
+		<div class = "remember-forgot">
+			<label><input type = "checkbox">
+			agree to the terms & conditions</label>
+		</div>
+
+		<button type="submit" class ="btn"> Register </button>
+
+		<div class="login-register">
+			<p> Already have an account?
+				<a href="{%url 'login'%}" class="login-link" type="submit">Login</a>
+			</p>
+		</div>
+		
+	</form>
+
+</div>
+</div>
+<div>
+	{% for message in messages %}
+	<h2>{{message}}</h2>
+	{% endfor %}
+</div>
+
+
+<script src="/static/login.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

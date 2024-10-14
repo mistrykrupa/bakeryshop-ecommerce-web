@@ -1,0 +1,131 @@
+
+
+{% block content %}
+{% load static %}
+{% if request.session.cart|length < 1 %}
+
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+
+<div id="cart-container">
+  <div id="cart-icon">&#128722;</div>
+  <div id="empty-message">Your cart is empty.</div>
+  <a href="{% url 'item' %}" id="continue-shopping-btn">Continue Shopping</a>
+</div>
+
+
+{% else %}
+
+{% load cart_tag %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+
+  <header>
+    <a href="{%url 'item'%}"><img src="/static/image/back.png" width="30px" class="arrow"></a>
+        <h1>Bakery Shop Cart</h1>
+      </header>
+    
+      <div class="cart-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key,value in request.session.cart.items %}
+            <tr>
+              <td>
+                <img src="{{value.image}}" alt="Bread" class="product-image">  
+             </td>
+             <td>{{value.name}}</td>
+              <td>₹ {{value.price}}</td>
+              <td class="quantity">
+                <div class="quantity_button">
+                    <a class="quantity_up" href="{% url 'item_increment' value.product_id %}"> <button>+</button> </a>
+                      <input class="cart-plus-minus-box" type="text" name="qtybutton" value="{{value.quantity}}" />
+                    {% if value.quantity > 1 %}
+                      <a class="quantity_down" href="{% url 'item_decrement' value.product_id %}"> <button>-</button> </a>  
+                        {% endif %}
+                </div>
+              </td>
+              <td>₹ {{ value.price|multiply:value.quantity }}</td>
+              <td>
+                <a href="{% url 'item_clear' key %}"><button class="remove-btn" onclick="removeItem(this)">Remove</button></a>
+                <!--<button class="edit-btn" onclick="editItem(this)">Edit</button>-->
+              </td>
+            </tr>
+            {%endfor%}
+            <!-- Add more rows for other products -->
+          </tbody>
+        </table>
+        <div class="col-25">
+          
+            
+          <div class="container">  
+            
+            
+            
+            <form action="{% url 'cart_view' %}" method="POST">
+              
+              {% csrf_token %}
+              
+              <div class="search-container">
+                
+                
+
+                Have Coupon?  &nbsp;<input type="text" placeholder="Enter Code..." name="code" id="coupon">
+                  <button type="submit" class="botom"> Apply </button>      
+              </div><br><hr>
+              <div class="coupon-msg">
+                <div class="total-price">Total Amount:  ₹ {{cart_total_amount}}</div>
+                {% if coupon_discount_percentage > 0 %}
+                <div>Coupon Discount: {{ coupon_discount_percentage }}%</div>
+                <div>Discount Amount: ₹ {{ discount_amount }}</div>
+                <div>Discounted Total: ₹ {{ discounted_total }}</div>
+                {% else %}
+                <div>No Coupon Applied</div>
+                {% endif %}
+              </div>
+              <input type="hidden" name="discounted_total" value="{% if discounted_total %}{{ discounted_total }}{% else %}{{ cart_total_amount }}{% endif %}">
+              <input type="hidden" name="custom_amount" value="your_custom_amount_here">
+            </form> 
+            
+          </div>
+          
+        </div>
+        
+        
+        <hr>
+    
+        <div class="actions">
+            <a href="{% url 'cart_clear' %}"><button class="clear-btn" onclick=""> Clear All </button></a>
+            <form action="{% url 'checkout' %}" method="post">
+              {% csrf_token %}
+              <input value="{% if coupon_discount_percentage > 0 %}{{ discounted_total }}{% else %}{{ cart_total_amount }}{% endif %}" name="amount" hidden>
+              <input type="hidden" name="discounted_total" value="{% if discounted_total %}{{ discounted_total }}{% else %}{{ cart_total_amount }}{% endif %}">
+              <input type="hidden" name="custom_amount" value="your_custom_amount_here">
+            <a href="{% url 'checkout' %}"><button class="checkout-btn" type="submit" onclick="" > Checkout </button></a>
+            </form>
+            
+          
+
+          
+
+        </div>
+      </div>
+
+      
+
+        
+    
+
+  <script src="{% static 'cart.js' %}">
+    
+  </script>
+
+ {% endif %} 
+{%endblock%}

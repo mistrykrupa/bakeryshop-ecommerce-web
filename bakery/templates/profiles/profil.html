@@ -1,0 +1,116 @@
+{% extends 'hf.html'%}
+{% block content %}
+{% load static %}
+
+ 
+
+
+<head>
+  <style>
+    /* Style for container-fluid */
+.container-fluid {
+    padding: 20px;
+}
+
+/* Style for headings */
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style for alerts */
+.alert {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+/* Style for card */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Style for profile image */
+.profile-image {
+    border-radius: 50%;
+}
+
+/* Style for profile information */
+.profile-info {
+    margin-bottom: 20px;
+}
+
+.profile-info strong {
+    font-weight: bold;
+}
+
+/* Style for update profile button */
+.update-profile-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.update-profile-btn:hover {
+    background-color: #0056b3;
+}
+
+</style>
+</head>
+<body>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+        </div>          
+
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <!-- Main Content Here -->
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3 my-5">
+            <img src="{{user.userprofile.profile_image.url}}" class="rounded float-right" height="300px" width="300px">
+          </div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body">  
+                <p><strong>Firstname: </strong> {{user.first_name}} </p>
+                <p><strong>Lastname: </strong> {{user.last_name}} </p>
+                <p><strong>Username: </strong> {{user.username}} </p>
+                <p><strong>Email: </strong> {{user.email}} </p>
+                
+                <!-- <p><strong>Phone Number: </strong> {{UserProfile.phone}} </p>
+                <p><strong>Address: </strong> {{user.userprofile.address}} </p> -->
+                <a href="{% url 'profile-update' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+  </body>
+{% endblock content %}

@@ -1,0 +1,55 @@
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+{% load cart_tag %}
+  <header>
+    <a href="{%url 'item'%}"><img src="/static/image/back.png" width="30px" class="arrow"></a>
+        <h1>My Order Items</h1>
+      </header>
+    
+      <div class="cart-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for it in orders %}
+            <tr>
+              <td>
+                <img src="{{it.image}}" alt="Bread" class="product-image">  
+             </td>
+             <td>{{it.item}}</td>
+              <td>₹ {{it.price}}</td>
+              <td class="quantity">
+                <div class="quantity_button">
+                    <br><br>
+                    <a style="text-align: center;">{{it.quantity}}</a>  
+                    <br><br><br> 
+                </div>
+              </td>
+              <td>₹ {{it.total}}</td>
+              <td>{{it.process}}</td>
+                <!-- {% for key,value in request.session.cart.items %}
+                <a href="{% url 'item_clear' key %}"><button class="remove-btn" onclick="removeItem(this)" value="">Remove</button></a>
+                {%endfor%} -->
+              
+            </tr>
+            {% endfor %}
+            <!-- Add more rows for other products -->
+          </tbody>
+        </table>
+    
+        
+
+        <script src="{% static 'cart.js' %}"></script>
+
+{% endblock %}

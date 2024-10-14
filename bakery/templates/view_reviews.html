@@ -1,0 +1,10 @@
+{% extends 'hf.html' %}
+
+{% block content %}
+    <h1>Reviews for Item {{ item_id }}</h1>
+    {% for review in reviews %}
+        <p>{{ review.text }} - Rating: {{ review.rating }}</p>
+    {% endfor %}
+
+    <a href="{% url 'base' item_id=item_id %}">Submit a Review</a>
+{% endblock %}

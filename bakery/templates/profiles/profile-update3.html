@@ -1,0 +1,149 @@
+{% block content %}
+{% load static %}
+<head>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="path/to/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  
+    /* Custom CSS */
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #28a745;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+
+</style>
+</head>
+
+<body>
+  
+ 
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+      <!-- Page Heading -->
+      <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+      < <h1 class="h3 mb-0 text-gray-800">Profile Update</h1> ->
+      </div>           -->
+
+      <!-- Main Content Here -->
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Update Your Profile!</h1>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <!-- <input type="hidden" name="csrfmiddlewaretoken" value="sVp2P2CNyZdtMpcoqEhfsfrAtOGaGfRhPwXZmlF02XSeoAylLMHzwtwWV9dL1dqc"> -->
+                  <div>
+    <label for="id_username">Username:</label>
+
+    <!-- <div class="helptext" id="id_username_helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div> -->
+
+    <input type="text" name="username"  maxlength="150" required aria-describedby="id_username_helptext" id="id_username">
+
+    </div>
+
+    <div>
+    <label for="id_first_name">First name:</label>
+
+
+
+    <input type="text" name="first_name"  maxlength="150" id="id_first_name">
+
+    </div>
+
+    <div>
+    <label for="id_last_name">Last name:</label>
+
+
+
+    <input type="text" name="last_name"  maxlength="150" id="id_last_name">
+
+    </div>
+
+    <div>
+    <label for="id_email">Email address:</label>
+
+
+
+    <input type="email" name="email"  maxlength="254" id="id_email">
+
+
+
+    </div>
+                  <div>
+    <label for="id_phone">Phone:</label>
+
+
+
+    <input type="text" name="phone"  maxlength="12" id="id_phone">
+
+    </div>
+
+    <div>
+    <label for="id_address">Address:</label>
+
+
+
+    <input type="text" name="address"  maxlength="12" id="id_address">
+
+    </div>
+
+    <div>
+    <label for="id_profile_image">Profile image:</label>
+
+
+
+    <input type="file" name="profile_image" accept="image/*" id="id_profile_image">
+
+
+
+    </div>
+                  <button type="submit" class="btn btn-success btn-block">Update</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                  <a class="small" href="/profile/">Profile</a>
+                  <a class="small" href="/home/">Back</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+  
+</body>
+
+{% endblock %}

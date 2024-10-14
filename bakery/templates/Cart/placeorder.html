@@ -1,0 +1,121 @@
+{% block content %}
+{% load static %}
+
+{% if request.session.cart|length < 1 %}
+
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+
+<div id="cart-container">
+  <div id="cart-icon">&#128722;</div>
+  <div id="empty-message">Your placeorder is empty.</div>
+  <a href="{% url 'item' %}" id="continue-shopping-btn">Continue Shopping</a>
+</div>
+
+
+{% else %}
+
+
+
+{% load cart_tag %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+
+  <header>
+    <a href="{%url 'item'%}"><img src="/static/image/back.png" width="30px" class="arrow"></a>
+        <h1>Bakery Shop Order</h1>
+      </header>
+    
+      <div class="cart-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>         
+            </tr>
+          </thead>
+          <tbody>
+            {% for key,value in request.session.cart.items %}
+            <tr>
+              <td>
+                <img src="{{value.image}}" alt="Bread" class="product-image">  
+             </td>
+             <td>{{value.name}}</td>
+              <td>₹ {{value.price}}</td>
+              <td class="quantity">
+                <div class="quantity_button">
+                    <br><br>
+                    <a style="text-align: center;">{{value.quantity}}</a>  
+                    <br><br><br>  
+                </div>
+              </td>
+              <td>₹ {{ value.price|multiply:value.quantity }}</td>
+              
+            </tr>
+            {%endfor%}
+            <!-- Add more rows for other products -->
+          </tbody>
+        </table>
+        <div class="actions">
+          <form action="{% url 'place_order' %}" method="post">
+            {% csrf_token %}
+            <input value="{{ discounted_total }}" name="amount" required hidden>
+              <!-- <input value="{% if coupon_discount_percentage > 0 %}{{ discounted_total }}{% else %}{{ cart_total_amount }}{% endif %}" name="amount" hidden required> -->
+            <!-- <a href="{% url 'place_order' %}"><button class="btn" type="submit" onclick="" > Continue </button></a>
+             -->
+            <!-- <input value="{{cart_total_amount}}" name="amount" hidden required> -->
+            <a id="rzp-button1">
+              <button class="clear-btn" type="submit" onclick=""> Place Order </button>
+            </a>
+            
+            </form>
+            <div class="total-price">Total Amount:  ₹ {{ discounted_total }}</div>
+        </div>
+    
+        
+      </div>
+
+  <script src="{% static 'cart.js' %}">
+    
+  </script>
+<!--end-->
+
+<form action="{% url 'success' %}" method="post">
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+  var options = {
+      "key": "rzp_test_GlJYFNxBTLjsk4",
+      "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "A1 Bakers", //your business name
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": "{{ order_id }}", 
+      "callback_url": "http://127.0.0.1:8000/success/",
+      
+      "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+          "name": "Gaurav Kumar", //your customer's name
+          "email": "gaurav.kumar@example.com",
+          "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+      },
+      "notes": {
+          "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('rzp-button1').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+  
+  </script>
+ 
+</form>
+{%endif%}
+
+{% endblock %}

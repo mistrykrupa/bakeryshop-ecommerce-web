@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Live Bakers</title>
+    <link rel="shortcut icon" type="image" href="./image/logo.png">
+    <link rel="stylesheet" href=" {% static 'style.css' %}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    
+    <!-- bootstrap links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- bootstrap links -->
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uchen&display=swap" rel="stylesheet">
+    <!-- fonts links -->
+    <!-- icons links -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <!-- icons links -->
+    <!-- animation links -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- animation links -->
+</head>
+<body>
+    <div class="all-content">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-md" id="navbar">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#" id="logo"><img src="/static/image/logo.png" alt="" width="70px">A1 Bakers</a>
+          
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span><img src="/static/image/menu.png" alt="" width="30px"></span>
+            </button>
+          
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <!-- dropdown -->
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                     Item
+                    </a>                    
+                    <div class="dropdown-menu">
+                        <a href="{% url 'item' %}" class="dropdown-item">All Items</a>
+                        {% for cat in categories %}
+                        <a href="/item/?categories={{cat.id}}" class="dropdown-item">{{cat.name}}</a>
+                        {% endfor %}
+
+                    </div>
+                    
+                </li>
+                <!-- dropdown -->
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'gallary' %}">Galary</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+                
+                <li>
+                    <form action="/search/" method="get" >
+                        <div class="search-container">
+                            <input type="text" placeholder="Search..." name="query" id="query"/>
+                            <button type="submit" class="botom"> <i class="fas fa-search"></i> </button>
+                        </div>
+                    </form>
+<!--
+                    <div class="search-container">
+                        <input type="text" placeholder="Search...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+-->               
+                
+                </li>
+              </ul>
+            </div>
+            <div class="icons">
+                
+                {% if user.is_authenticated %}
+                
+                
+                <h4>&nbsp; Hello, {{user.first_name}}</h4>
+                <a href="{% url 'profile' %}"><img src="/static/image/pro.png"  alt="" width="45px"></a> 
+                <a href="{% url 'logout' %}"><img src="/static/image/logout.png"  alt="" width="27px"></a>
+
+                
+                {% else %}
+
+                <a href="{% url 'login' %}"><img src="/static/image/user.png"  alt="" width="27px"></a>
+                {% endif %}
+                <!--<a href="{% url 'wishlist' %}"><img src="/static/image/heart.png" alt="" width="27px"></a>-->
+                
+                <div class="cart-container">
+                    <a href="{% url 'cart_detail'%}"><img class="cart-image" src="/static/image/add.png" alt="Cart Image" ></a>
+                    <div class="product-count">{{request.session.cart|length}}</div>
+                </div>
+            </div>
+            <!--<a href="{% url 'cart_detail'%}"><img src="/static/image/add.png" alt="" width="24px"></a>-->
+
+            
+          </nav>
+        <!-- navbar end -->
+      
+ <!--    home section  -->
+<div class="home">
+    <div class="content" data-aos="zoom-out-right">
+        <h3>Delicious
+            <br>Cakes Bakery
+        </h3>
+        <h2>Category <span class="changecontent"></span></h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error,
+            <br>Lorem ipsum dolor sit amet consectetur.
+        </p>
+        
+    </div>
+</div>
+<!-- home section end --> -->
+
+<!-- top cards-->
+<div class="container" id="box"    data-aos="fade-up"
+data-aos-duration="1500">
+<div class="row">
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box1.jpg" alt="">
+        </div>
+    </div>
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box2.jpg" alt="">
+        </div>
+    </div>
+    <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/box3.jpg" alt="">
+        </div>
+    </div>
+</div>
+</div>
+ <!-- top cards end --> 
+
+<!-- banner -->
+<div class="banner" data-aos="fade-up" data-aos-duration="1500">
+    <div class="content">
+        <h3>Delicious Cake</h3>
+        <h2>UPTO 50% OFF</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, quod.</p>
+        
+    </div>
+    <div class="img">
+        <img src="/static/image/banner-background.png" alt="">
+    </div>
+</div>
+  <!-- banner end --> 
+
+<!-- product cards
+<section id="product-cards" data-aos="fade-up" data-aos-duration="1500">
+<div class="container">
+    <h1>CAKES</h1>
+    <div class="row" style="margin-top:50px;">
+       
+       <div class="col-md-3 py-3 py-md-0">
+        <br> <br>
+        <div class="card">
+            <div class="overlay">
+                <button type="button" class="btn btn-secondary" title="Quick View"><i><img src="/static/image/views.png" alt="" width="30px"></i></button>
+                <button type="button" class="btn btn-secondary" title="Add to Wishlist"><i><img src="/static/image/heart.png" alt="" width="30px"></i></button>
+                <button type="button" class="btn btn-secondary" title="Add to Cart"><i><img src="/static/image/add.png" alt="" width="30px"></i></button>
+            </div>
+            <img src= "" alt="">
+
+            {% if it.offer %}
+            <div class="spec_offer text-center"><a href ="#">Special Offer</a></div>
+            {% endif %}
+            <div class="card-body">
+                <h3></h3>
+                <div class="star">
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star "></i>
+                  <i class="bx bxs-star "></i>
+                </div>
+                <p></p>
+                <h6> <span><button>Add Cart</button></span></h6>
+            </div>
+        </div>
+       </div>
+       
+</section>
+product cards end-->
+
+
+<!-- gallary -->
+<section id="gallary"    data-aos="fade-up"
+data-aos-duration="1500">
+<div class="container">
+    <h1>OUR GALLARY</h1>
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Donuts</h3>
+                </div>
+                <img src="/static/image/o1.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Ice Cream</h3>
+                </div>
+                <img src="/static/image/o2.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Cup Cake</h3>
+                </div>
+                <img src="/static/image/o3.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 30px;"    data-aos="fade-up"
+    data-aos-duration="1500">
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Delicious Cake</h3>
+                </div>
+                <img src="/static/image/o4.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Chocolate Cake</h3>
+                </div>
+                <img src="/static/image/o5.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <div class="overlay">
+                    <h3 class="text-center">Slice Cake</h3>
+                </div>
+                <img src="/static/image/o6.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- gallary --> 
+
+
+
+<!-- about--> 
+<div class="container" id="about"    data-aos="fade-up"
+data-aos-duration="1500">
+<h1>ABOUT US</h1>
+<div class="row">
+    <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+            <img src="/static/image/about.png" alt="">
+        </div>
+    </div>
+    <div class="col-md-6 py-3 py-md-0">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias explicabo nulla dicta perferendis cupiditate autem assumenda unde fugit? Corrupti ipsa fugiat similique voluptate temporibus, cupiditate cumque iusto? Necessitatibus suscipit qui molestias odit ad aspernatur harum aliquid ipsam nisi, culpa quae, magnam dolores cupiditate velit exercitationem ratione deleniti dignissimos labore quia esse ea quos consequuntur perferendis aliquam. Est assumenda doloremque nobis, tenetur fuga similique eligendi nihil non officia possimus aliquid animi nisi ipsum qui veritatis repellat harum accusamus odit iusto laudantium voluptatum ipsa ut fugit veniam. Voluptates sint molestiae officia consequuntur iure repudiandae autem reiciendis, perspiciatis veritatis soluta quia velit necessitatibus.</p>                
+
+        <div id="bt"><button>Read More...</button></div>
+    </div>
+</div>
+</div>
+ <!-- about --> 
+
+
+<!-- contact --> 
+<div class="container" id="contact"    data-aos="fade-up"
+data-aos-duration="1500">
+<h1>CONTACT US</h1>
+<div class="row">
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" placeholder="Name">
+        </div>
+    </div>
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="email" class="form-control" id="eml" placeholder="Email">
+        </div>
+    </div>
+    <div class="col-md-4 py-1 py-md-0">
+        <div class="form-group">
+            <input type="number" class="form-control" id="phn" placeholder="Phone">
+        </div>
+    </div>
+    
+</div>
+<div class="form-group">
+    <textarea class="form-control" rows="5" id="comment" placeholder="Message"></textarea>
+</div>
+<div id="messagebtn"><button>Send Message</button></div>
+</div>
+ <!-- contact end --> 
+
+        
+
+      {%block content %}{%endblock%}
+
+      <!-- footer -->
+      <footer id="footer"    data-aos="fade-up"
+      data-aos-duration="1500">
+        <h1 class="text-center">A1 Live Bakers</h1>
+        <!-- <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, accusantium.</p> -->
+        <div class="icons text-center">
+            <!-- <i class="bx bxl-twitter"></i> -->
+            <!-- <i class="bx bxl-facebook"></i>
+            <i class="bx bxl-google"></i>
+            <i class="bx bxl-skype"></i>
+            <i class="bx bxl-instagram"></i> -->
+        </div>
+        <div class="copyright text-center">
+            &copy; Copyright <strong>A1 Bakery</strong> .All Rights Reserved
+        </div>
+        <div class="credite text-center">
+            Designed By <a href="#"><span>SA coding</span></a>
+        </div>
+      </footer>
+      <!-- footer -->
+
+      <a href="#" class="arrow"><i><img src="/static/image/up-arrow.png" alt="" width="50px"></i></a>
+
+
+
+    </div>
+
+
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+      <!--<script src="js/main.js"></script>-->
+
+      <!--<script src="script.js"></script>-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!--Alert message-->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        alertify.set('notifier','position', 'bottom-right');
+            {% for msg in messages %}
+                alertify.success('{{msg}}');
+            {% endfor %}
+    </script>
+    
+
+
+</body>
+</html>

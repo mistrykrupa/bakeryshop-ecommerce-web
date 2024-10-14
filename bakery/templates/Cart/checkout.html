@@ -1,0 +1,129 @@
+
+{% block content %}
+{% load static %}
+
+{% load cart_tag %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href=" {% static 'checkout.css' %}">
+
+<header>
+  <a href="{%url 'cart_detail'%}"><img src="/static/image/back.png" width="30px" class="arrow"></a>
+      <h1>Checkout</h1>
+ </header><br>
+
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+      <form action="{% url 'place_order' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="discounted_total" value="{{ discounted_total }}">
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <div class="row">
+              <div class="col-50">  
+                <label for="fname"><i class="fa fa-user"></i> First Name</label>
+                <input type="text" value="{{user.first_name}}" readonly id="fname" name="firstname" placeholder="john">
+                <input type="text" value="{{order_id}}" name="order_id" hidden>
+                <input type="text" value="{{payment}}" name="payment" hidden>
+              </div>
+              <div class="col-50">
+                <label for="lname"><i class="fa fa-user"></i> Last Name</label>
+                <input type="text" value="{{user.last_name}}" readonly id="lname" name="lastname" placeholder="Doe">
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-50"> 
+                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                <input type="text" value="{{user.email}}" readonly id="email" name="email" placeholder="john@example.com">
+                </div>
+                <div class="col-50">
+                <label for="phone"><i class="fa fa-phone"></i> Phone</label>
+                <input type="text" value="{{userprofile.phone}}" id="phone" name="phone" placeholder="+91 1234567890">
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-50">
+                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                <input type="text" id="adr" value="{{userprofile.address}}" name="address" placeholder="542 W. 15th Street" >
+
+                <label for="city"><i class="fa fa-institution"></i> City</label>
+                <input type="text" id="city" name="city" value="{{userprofile.city}}" placeholder="New York">
+                </div>
+              </div>
+
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" value="{{userprofile.state}}" name="state" placeholder="NY">
+              </div>
+              <div class="col-50">
+                <label for="zip">Pin</label>
+                <input type="text" id="zip" value="{{userprofile.pin}}" name="pin" placeholder="10001">
+              </div>
+            </div>
+          </div>
+<!--
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2018">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+        -->         
+        </div>
+        
+          <form action="{% url 'cart_view' %}" method="post">
+            {% csrf_token %}
+            <input value="{{ discounted_total }}" name="amount" required hidden>
+            <!-- <input value="{% if coupon_discount_percentage > 0 %}{{ discounted_total }}{% else %}{{ cart_total_amount }}{% endif %}" name="amount"  required> -->
+          <a href="{% url 'place_order' %}"><button class="btn" type="submit" onclick="" > Continue </button></a>
+          </form>
+            <!-- <input value="{{cart_total_amount}}" name="amount" hidden required>
+            <input type="submit" value="Continue" class="btn">
+           -->
+        
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="col-25">   
+    <div class="container">      
+      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{request.session.cart|length}}</b></span></h4>
+      {% for key,value in request.session.cart.items %}
+      <p ><a style="color:grey;">{{value.name}} × {{value.quantity}}</a> <span class="price">₹ {{ value.price|multiply:value.quantity }}</span></p>
+      {%endfor%}
+      <hr>
+      <p><b>Total: <span class="price" style="color:black"> 
+        <input value="₹ {{ discounted_total }}" name="amount" readonly style="border:none;" style="background-color:#f2f2f2;" style="text-align: right;" required/>
+      </b></span></p>
+      
+    </div>
+    
+  </div>
+  
+</div>
+
+
+{%endblock%}

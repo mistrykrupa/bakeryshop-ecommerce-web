@@ -1,0 +1,57 @@
+{% extends 'hf.html'%}
+{% block content %}
+{% load static %}
+
+<div class="container">
+<br>
+   <h3 style="color:white;"> Search Result : </h3>
+   {% if itm|length < 1  %}
+   <p style="color:white;"> No Product Found</p>
+    {% endif %}
+</div>
+
+<section id="product-cards" data-aos="fade-up" data-aos-duration="1500">
+<div class="container">
+    
+    <div class="row" style="margin-top:50px;">
+        {% for it in itm %}
+       <div class="col-md-3 py-3 py-md-0">
+        
+        <div class="card">
+            <div class="badge">{{it.stock}}</div>
+            <div class="overlay">
+                <a href="{{it.id}}"><button type="button" class="btn btn-secondary" title="Quick View"><i><img src="/static/image/views.png" alt="" width="30px"></i></button></a><br>
+                <!--<a href="{% url 'wishlist' %}"><button type="button" class="btn btn-secondary" title="Add to Wishlist"><i><img src="/static/image/heart.png" alt="" width="30px"></i></button></a><br>
+                 <a href="{% url 'cart_detail' %}"><button type="button" class="btn btn-secondary" title="Add to Cart"><i><img src="/static/image/add.png" alt="" width="30px"></i></button></a>-->
+            </div>
+            <a href="{{it.id}}">
+            <img src= "{{it.image.url}}" alt="Item" style="position:center;" width="95%"/>
+            </a>
+
+            {% if it.offer %}
+            <div class="spec_offer text-center"><a href ="#">Special Offer</a></div>
+            {% endif %}
+            <div class="card-body">
+                
+                <h3>{{it.name|truncatewords:10}}</h3>
+                <h5>{{it.categories}}</h5>
+                <!--
+                <div class="star">
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star checked"></i>
+                  <i class="bx bxs-star "></i>
+                  <i class="bx bxs-star "></i>
+                </div>
+                -->
+                <br>
+                <h6>₹ {{it.price}} <span>
+                    <a href="{% url 'cart_add' it.id %}"><button>Add Cart</button></a></span></h6>
+            </div>
+        </div>
+       </div>
+       {% endfor %}
+</section>
+
+
+{% endblock %}

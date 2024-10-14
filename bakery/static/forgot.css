@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-image: url('/static/image/bg_.jpg');
+    background-size: cover;
+}
+
+input{
+    display: block;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box{
+    border: 2px solid #935f23;
+    border-radius: 20px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    height: 250px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+
+h2{
+
+    font-size: 2em;
+    color: #935f23;
+    text-align: center;
+}
+
+#username,#password{
+    width: 275px;
+    height: 25px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #935f23;
+    margin: 10px;
+    color: #935f23;
+}
+
+input::placeholder{
+    color: #935f23;
+    font-size: 14px;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color:#935f23;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #935f23;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+#forgot{
+    width: 275px;
+    height: 25px;
+    outline: none;
+    border: none;
+    margin: 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #f9de8f;
+    cursor: pointer;
+    background: #935f23;
+}
+
+p{
+    /* position: absolute; */
+    font-size: 16px;
+    color: black;
+    margin-top: 11px;
+    text-align: center;
+}
+
+.log{
+    font-weight: 800;
+    color:black;
+}
+
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #935f23;
+    line-height: 57px;
+
+}

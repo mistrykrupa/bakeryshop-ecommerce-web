@@ -1,0 +1,13 @@
+<!-- submit_review.html -->
+{% extends 'hf.html' %}
+
+{% block content %}
+    <h1>Submit a Review for Item {{ item_id }}</h1>
+    <form method="post" action="{% url 'submit_review' item_id=item_id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <a href="{% url 'view_reviews' item_id=item_id %}">Back to Reviews</a>
+{% endblock %}

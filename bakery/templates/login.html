@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title> Login </title>
+	
+	<link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+
+<body>
+	
+	
+		<!--{% for message in messages %}-->
+		
+		<div class="alert">
+			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 	
+			<strong>{{message}}</strong>
+		</div>
+		<!--{% endfor %}-->
+	
+
+
+<div class="wrapper">
+	<span class="icon-close">
+		<a class="icon-close" href="{% url 'base'%}"><ion-icon name="close"></ion-icon></a>
+	</span>
+	<div class = "form-box login">
+	<h2> Login </h2>
+	<form action ="{% url 'login'%}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="person"></ion-icon>
+			</span>
+			<input type = "text" name="username" required>
+			<label>Username</label>
+		</div>
+
+		<div class = "input-box">
+			<span class = "icon">
+				<ion-icon name="lock-closed"></ion-icon>
+			</span>
+			<input type = "password" name="password" required>
+			<label>Password</label>
+		</div>
+
+		<div class = "remember-forgot">
+			<label><input type = "checkbox">
+			Remeber Me</label>
+			<a href="{% url 'password_reset' %}"> Forgot Password? </a>
+		</div>
+
+		<button type="submit" class ="btn"> Login </button>
+
+		<div class="login-register">
+			<p> Don't have an account?
+				<a href="{%url 'register'%}" class="register-link">Register</a>
+			</p>
+		</div>
+	</form>
+	</div>
+	
+</div>
+
+
+
+<!--
+<script>
+function togglePopup() {
+    var popup = document.getElementById('popup');
+    popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+  }
+</script>
+-->
+
+<script src="/static/login.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

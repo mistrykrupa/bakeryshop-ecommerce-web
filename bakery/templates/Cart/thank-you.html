@@ -1,0 +1,21 @@
+
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'thankyou.css' %}">
+
+<div class="thank-you-container">
+    <div class="thank-you-icon">&#10004;</div>
+    <h2>Thank You!</h2>
+    <p>Your order has been successfully completed.</p>
+    <div class="back-to-home">
+    <button id="back-to-home" onclick="window.location.href='/home'">Back to Home</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    {% if order %}
+            <!-- Generate Invoice button with dynamic URL -->
+        <a href="{% url 'generateinvoice' order.id %} "  class="btn btn-primary"><button id="back-to-home">Generate Invoice</button></a>
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}
