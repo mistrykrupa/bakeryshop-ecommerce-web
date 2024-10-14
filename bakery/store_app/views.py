@@ -216,35 +216,7 @@ def logout(request):
     auth.logout(request)
     return redirect('home')
 
-"""
-def Change_Password(request):
-    if request.method == 'POST':
-        fm = PasswordChangeForm(user=request.user,data=request.POST)
-        if form.is_valid():
-            fm.save()
-            update_session_auth_hash(request,fm.user)
-            message.success(request,'Your password has be change successfully....')
-            return redirect('home')
 
-    else:
-        fm = PasswordChangeForm(user=request.user)
-
-    return render (request,'confirm_password.html',{'fm': fm})
-
-
-
-
-def forgotpassword(request):
-    if request.method == 'POST':
-        form = PasswordResetForm(request.POST)
-        if form.is_valid():
-            form.save(request=request)
-            messages.success(request, 'An email has been sent with instructions to reset your password.')
-            return redirect('login')  # Redirect to the login page after sending the reset email
-    else:
-        form = PasswordResetForm()
-    return render(request, 'forgotpassword.html', {'form': form})
-"""
 
 def search(request):
     query = request.GET.get('query')
@@ -411,47 +383,7 @@ def wishlist(request):
 
 
 
-# def Check_out(request):
-    
-#     amount_str = str(request.POST.get('amount'))
-#     # Check if amount_str is not None before converting to int
-#     if amount_str is not None:
-#         try:
-#             amount = float(amount_str)
-#         except ValueError:
-#             # Handle the case when 'amount_str' cannot be converted to float
-#             amount = 0.0
 
-#         # Check if the amount is less than 1.00
-#         if amount < 1.00:
-#             # Set the minimum amount to 1.00
-#             amount = 1.00
-#     else:
-#         # Provide a default value or handle the case where 'amount' is not available
-#         amount = int(amount_str)* 100
-   
-
-#     # amount_str = request.POST.get('amount')
-#     # amount_float = float(amount_str)
-#     # amount = int(amount_float)*100
-
-#     payment=client.order.create({
-#         "amount": amount*100,
-#         "currency": "INR",
-#         "payment_capture": "1"
-#     })
-
-#     userprofile = Profile.objects.filter(user=request.user).first()
-
-
-#     order_id = payment['id']
-#     context={
-#         'order_id': order_id,
-#         'payment': payment,
-#         'userprofile': userprofile,
-#     }
-    
-#     return render(request, 'Cart/checkout.html',context)
 
 
 def cart_view(request):
@@ -679,36 +611,7 @@ def Your_Order(request):
 # cart end
 
 
-#Review & Ratings
-"""
-def submit_review(request, item_id):
-   
-    url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':
-        try:
-             reviews = ReviewRating.objects.get(user__id =request.user.id,item__id=item_id)
-             form = ReviewForm(request.POST, instance= reviews)
-             form.save()
-             messages.success(request ,'Thank You! Your review has been updated.')
-             return redirect('item',item_id=item_id)
-        except ReviewRating.DoesNotExist:
-            form=ReviewForm(request.POST)
-            if form.is_valid():
-                data=ReviewRating()
-                data.review =form.cleaned_data['review']
-                data.rating =form.cleaned_data['rating']
-                data.ip =request.META.get['REMOTE_ADDR']
-                data.item_id=item_id
-                data.user_id=request.user.id
-                data.save()
-                messages.success(request ,'Thank You! Your review has been submitted.')
-                return render(request,'item.html', {'form': form, 'item': item})
-            else:
-                form = ReviewForm()
-        
 
-    return render(request, 'item.html', {'form': form, 'item': item})    
-"""
 
 
 def submit_review(request, item_id):
@@ -842,65 +745,3 @@ def generate_invoice(request, order_id):
     return response
 
 
-"""
-
-
-def profile(request):
-    user_id = request.user.id
-    curr_user = cust.objects.filter(id=user_id)
-    curruser = cust.objects.filter(id=user_id).first()
-    return render(request, "profiles/profile.html", {'curr_user': curr_user, 'curruser': curruser})
-  
-
-def profile_edit(request):
-    user = request.user
-    curr_user = cust.objects.filter(user=user).first()
-
-    if request.method == "POST":
-        if curr_user is not None:
-            username = request.POST.get('username')
-            first_name = request.POST.get('firstname')
-            last_name = request.POST.get('lastname')
-            phone = request.POST.get('phone')
-            email = request.POST.get('email')
-            gender = request.POST.get('gender')
-
-            curr_user.username = username
-            curr_user.first_name = firstname
-            curr_user.last_name = lastname
-            curr_user.phone = phone
-            curr_user.email = email
-            curr_user.gender = gender
-            curr_user.save()
-            return redirect('/profile/')
-    return render(request, "profiles/profile_edit.html", {'curr_user': curr_user})
-
-
-
-
-def create_cust(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
-        phone = request.POST.get('phone')
-        email = request.POST.get('email')
-        gender = request.POST.get('gender')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        hased_pass = make_password(password1)
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already taken')
-            return redirect('register')
-        if password1 != password2:
-            messages.error(request, 'Password and Confirm password must be same !')
-            return redirect('register')
-        else:
-            cust_user = User.objects.create(username=username, password=hased_pass, first_name=firstname, last_name=lastname, email=email)
-            x = cust.objects.create(username=cust_user, email=email, phone=phone, gender=gender, first_name=firstname, last_name=lastname)
-            x.save()
-            messages.error(request, "Account created successfully")
-            return redirect('login')
-    return render(request, 'registration.html')
-"""
